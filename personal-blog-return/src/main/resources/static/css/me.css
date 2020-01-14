@@ -1,0 +1,37 @@
+.me-padded-tb-mini {
+    padding-top: 0.1em !important;
+    padding-bottom: 0.2em !important;
+}
+.me-padded-tb-large {
+    padding-top: 2em !important;
+    padding-bottom: 2em !important;
+}
+.me-padded-tb-big {
+    padding-top: 3em !important;
+    padding-bottom: 3em !important;
+}
+.me-padded-tb-huge {
+    padding-top: 4em !important;
+    padding-bottom: 4em !important;
+}
+.me-padded-tb-massive {
+    padding-top: 5em !important;
+    padding-bottom: 5em !important;
+}
+/*font*/
+.me-text-thin {
+    font-weight: 300;/*大小*/
+}
+
+.me-text-spaced-mini{
+    letter-spacing: 1px;/*字间距*/
+}
+
+.me-text-line-mini{
+    line-height: 1.8;/*行间距*/
+}
+
+.me-text-opacity-mini {
+    opacity: 0.8 !important;
+}
+
