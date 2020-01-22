@@ -1,6 +1,8 @@
 /*---body---*/
 body{
-    background: #f5f5e6;
+    background-color: #f0ebff;
+
+
 }
 
 /*---padded---*/
@@ -53,6 +55,9 @@ body{
     padding-top: 5em !important;
     padding-bottom: 5em !important;
 }
+.me-padded-t-massive{
+    padding-top: 5em !important;
+}
 .me-padded-b-massive{
     padding-bottom: 5em !important;
 }
@@ -65,7 +70,7 @@ body{
 }
 .me-padded-lf-mini {
     padding-left: 0.1em !important;
-    padding-right: 0.2em !important;
+    padding-right: 0.1em !important;
 }
 /*---container----*/
 .me-container-small {
@@ -84,6 +89,10 @@ body{
     margin-top: 1em !important;
     margin-bottom: 1em !important;
 }
+.me-margin-lf-0{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
 .me-margin-tb-0{
     margin-top: 0 !important;
     margin-bottom: 0 !important;
@@ -96,6 +105,9 @@ body{
 }
 .me-margin-l-massive {
     margin-left: 6em !important;
+}
+.me-margin-r {
+    margin-right: 16px !important;
 }
 /*---font---*/
 .me-text-mini {
@@ -143,7 +155,26 @@ body{
     position: absolute;
     left: 1em;
 }
+.me-fixed {
+    position: fixed;
+}
+
+.me-right-bottom {
+    bottom: 0 !important;
+    right: 0 !important;
+}
 /*---mobile---*/
+.me-pad-show {
+    display: none !important;
+}
+@media screen and (max-width: 1280px){
+    .me-pad-hide{
+        display: none !important;
+    }
+    .me-pad-show{
+        display: block !important;
+    }
+}
 .me-mobile-show{
     display: none !important;
 }
@@ -159,4 +190,13 @@ body{
 /*---border---*/
 .me-border-radius {
     border-radius: 5em !important;
+}
+
+/*---width---*/
+.me-menu-width {
+    width: 4.4rem !important;
+}
+/*---z-index---*/
+.me-z-index-max {
+    z-index: 999;
 }

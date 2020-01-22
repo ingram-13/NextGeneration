@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+    <link rel="stylesheet" th:href="@{/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/css/me.css}">
+    <link rel="stylesheet" href="../../static/css/me.css">
+</head>
+<body >
+<!--导航-->
+<div th:replace="~{commons/commons::topSeg}"></div>
+<!--侧边栏-->
+<div th:replace="~{commons/commons::sideSeg}"></div>
+<!--Main-->
+
+<div  class="me-padded-tb-large ">
+    <div class="ui container">
+        <div class="ui grid stackable">
+            <!--照片-->
+            <div class="ui twelve wide column">
+                <div class="orange basic label">
+                    <img th:src="@{/images/aboutME.jpg} " alt="" class="ui circular" style="width: 100%;height: 650px">
+                </div>
+            </div>
+            <!--个人信息-->
+            <div class="ui four wide column">
+                <div class="ui top attached segment"><div class="ui"><h5>关于我</h5></div></div>
+                <div class="ui attached segment">
+                    <p class=" me-text-thin me-text-line">关于我,一名普通的大学生，好吃懒做，混吃等死</p>
+                    <p class="me-text-spaced-mini me-text-thin me-text-line">兴趣广泛，欢迎志同道合的朋友一起交流</p>
+                </div>
+                <div class="ui attached segment">
+                    <a class="label basic orange ui me-margin-r me-margin-tb">思考</a>
+                    <a class="label basic orange ui me-margin-r me-margin-tb">思考</a>
+                    <a class="label basic orange ui me-margin-r me-margin-tb">思考</a>
+                    <a class="label basic orange ui me-margin-r me-margin-tb">思考</a>
+                </div>
+                <div class="ui attached segment">
+                    <a class="label basic teal ui me-margin-r me-margin-tb left pointing">思考</a>
+                    <a class="label basic teal ui me-margin-r me-margin-tb left pointing">思考</a>
+                    <a class="label basic teal ui me-margin-r me-margin-tb left pointing">思考</a>
+                    <a class="label basic teal ui me-margin-r me-margin-tb left pointing">思考</a>
+                    <a class="label basic teal ui me-margin-r me-margin-tb left pointing">SPRING boot</a>
+                    <a class="label basic teal ui me-margin-r me-margin-tb left pointing">思考</a>
+                    <a class="label basic teal ui me-margin-r me-margin-tb left pointing">思考</a>
+                    <a class="label basic teal ui me-margin-r me-margin-tb left pointing">JavaSE</a>
+                </div>
+                <div class="ui attached segment">
+                    <a href="https://github.com/ingram-13" class="ui circular icon button"><i class="github icon"></i></a>
+                    <div class="ui circular icon button qq-btn"><i class="qq icon"></i></div>
+                    <div class="ui circular icon button wx-btn"><i class="weixin icon"></i></div>
+                    <div class="ui flowing popup top center transition hidden wx-pop">
+                        <div class="ui orange basic label">
+                            <div class="ui images "style="font-size: inherit !important;">
+                                <div class="ui  image">
+                                    <img class="ui image centered" th:src="@{/images/weChat.jpg}" style="width: 130px" alt=""><div class="" style="color: green">WeChat</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui flowing popup top center transition hidden tencent-pop">
+                        <div class="ui orange basic label">
+                            <div class="ui images "style="font-size: inherit !important;">
+                                <div class="ui image">
+                                    <img class="ui image centered" th:src="@{/images/qq.jpg}"  style="width: 130px" alt=""><div class="" style="color: blue">Tencent</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--尾部-->
+<div th:replace="~{commons/commons::bottomSeg}"></div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+
+<!--myScript-->
+<script>
+    $('.menu.button').click(function () {
+        $('.menu-i').toggleClass('me-mobile-hide');
+    });
+    $('.wx-btn').popup({
+            popup : ($('.wx-pop')),
+            position: 'bottom center'
+    });
+    $('.qq-btn').popup({
+        popup : ($('.tencent-pop')),
+        position: 'bottom center'
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>归档</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+    <link rel="stylesheet" th:href="@{/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/css/me.css}">
+    <link rel="stylesheet" href="../../static/css/me.css">
+</head>
+<body>
+<!--导航-->
+<div th:replace="~{commons/commons::topSeg}"></div>
+<!--侧边栏-->
+<div th:replace="~{commons/commons::sideSeg}"></div>
+<!--Main-->
+<div  class="me-padded-tb-large  me-container-small">
+    <div class="ui container">
+        <div class="ui teal  segment">
+            <div class="ui two column grid stackable">
+                <div class="column">
+                    <div class="ui item header teal">归档</div>
+                </div>
+                <div class="column right aligned">
+                    <div class="ui item header ">共 <h3 class="ui item orange header  me-display-inline">xx</h3>篇</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui horizontal divider me-margin-t-massive"><h3 class="header ui">2019</h3></div>
+        <div class="ui vertical menu fluid">
+            <a class="item header">
+                <span>Spring Boot 实战开发<div class="ui basic teal mini label left pointing">10月2号</div></span><div class="label basic orange ui">原创</div>
+            </a>
+            <a class="item header">
+                <span>Spring Boot 实战开发<div class="ui basic teal mini label left pointing">10月2号</div></span><div class="label basic orange ui">原创</div>
+            </a>
+            <a class="item header">
+                <span>Spring Boot 实战开发<div class="ui basic teal mini label left pointing">10月2号</div></span><div class="label basic orange ui">原创</div>
+            </a>
+            <a class="item header">
+                <span>Spring Boot 实战开发<div class="ui basic teal mini label left pointing">10月2号</div></span><div class="label basic orange ui">原创</div>
+            </a>
+        </div>
+
+        <div class="ui horizontal divider me-margin-t-massive"><h3 class="header ui">2020</h3></div>
+        <div class="ui vertical menu fluid">
+            <a class="item header">
+                <span>Spring Boot 实战开发<div class="ui basic teal mini label left pointing">10月2号</div></span><div class="label basic orange ui">原创</div>
+            </a>
+            <a class="item header">
+                <span>Spring Boot 实战开发<div class="ui basic teal mini label left pointing">10月2号</div></span><div class="label basic orange ui">原创</div>
+            </a>
+            <a class="item header">
+                <span>Spring Boot 实战开发<div class="ui basic teal mini label left pointing">10月2号</div></span><div class="label basic orange ui">原创</div>
+            </a>
+            <a class="item header">
+                <span>Spring Boot 实战开发<div class="ui basic teal mini label left pointing">10月2号</div></span><div class="label basic orange ui">原创</div>
+            </a>
+        </div>
+
+
+</div>
+</div>
+
+
+<!--尾部-->
+<div th:replace="~{commons/commons::bottomSeg}"></div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+
+
+<script>
+    $('.menu.button').click(function () {
+        $('.menu-i').toggleClass('me-mobile-hide');
+    });
+</script>
+</body>
+</html>
