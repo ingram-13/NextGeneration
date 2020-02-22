@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>标签发布</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+    <link rel="stylesheet" th:href="@{/css/me.css}">
+    <link rel="stylesheet" href="../../static/css/me.css">
+</head>
+<body >
+<!--导航-->
+<div th:replace="~{commons/commons::adminTopSeg(3)}"></div>
+<!--次级导航-->
+<div class="ui menu attached pointing">
+    <div class="ui container">
+        <div class="right menu">
+            <a th:href="@{/admin/queryTagPage}"  class="item">列表一览</a>
+            <a th:href="@{/admin/tagsRelease.html}"  class="item ui active">发布</a>
+        </div>
+    </div>
+</div>
+<!--main-->
+<div class="me-container-small me-margin-tb-massive-1">
+    <div class="ui container">
+
+        <form th:action="@{/admin/addTag}" class="ui form segment">
+
+                <!--封面-->
+            <div class=" field">
+                <div class="ui left labeled input">
+                    <label  class="ui teal basic label">标签</label>
+                    <input type="text" name="name" placeholder="标签名称">
+                </div>
+
+            </div>
+            <div class="ui negative message" th:unless="${#strings.isEmpty(tagRepeat)}" th:text="${tagRepeat}"></div>
+            <div class="ui negative message" th:unless="${#strings.isEmpty(tagEmpty)}" th:text="${tagEmpty}"></div>
+            <div class="ui negative message" th:unless="${#strings.isEmpty(tagOutOfBounds)}" th:text="${tagOutOfBounds}"></div>
+            <div class="ui error message"></div>
+
+            <div class="ui container right aligned me-margin-t-massive">
+                <button class="ui button" type="button" onclick="window.history.go(-1)">返回</button>
+                <button  class="ui teal button" type="submit">提交</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+
+
+
+<!--尾部-->
+<div th:replace="~{commons/commons::bottomSeg}"></div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<script>
+    //警告信息
+    $('.ui.form').form({
+        fields: {
+            name: {
+                identifier: 'name',
+                rules: [{
+                    type: 'empty',
+                    prompt: '请输入类型',
+                }]
+            }
+        }
+    })
+</script>
+</body>
+</html>

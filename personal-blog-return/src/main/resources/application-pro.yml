@@ -38,3 +38,6 @@ logging:
 
 server:
   port: 8081
+pagehelper:
+  reasonable: true
+

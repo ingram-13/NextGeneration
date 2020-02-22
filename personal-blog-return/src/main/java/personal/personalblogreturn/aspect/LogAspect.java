@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import personal.personalblogreturn.pojo.Blog;
 import personal.personalblogreturn.pojo.RequestLog;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,12 +30,17 @@ public class LogAspect {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Pointcut("execution(* personal.personalblogreturn.controller.*.*(..))")
-    public void log(){
+    public void accessLog(){
+
+    }
+
+    @Pointcut("execution(* personal.personalblogreturn.service.BlogServiceImpl.addBlog(..))")
+    public void addBlogTags(){
 
     }
 
     /*获得URL,IP,method,args*/
-    @Before("log()")
+    @Before("accessLog()")
     public void bLog(JoinPoint joinPoint){
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
@@ -50,16 +56,20 @@ public class LogAspect {
         logger.info("===>Request: {}",requestLog);
     }
 
-    @After("log()")
+    @After("accessLog()")
     public void aLog(){
         /*logger.info("----doAfter----");*/
     }
 
-    @AfterReturning(returning = "result",pointcut = "log()")
+    @AfterReturning(returning = "result",pointcut = "accessLog()")
     public void aReturn(Object result){
         logger.info("===>Result: {}", result);
 
     }
 
 
+    @After("addBlogTags()")
+    public void aBlog(){
+
+    }
 }

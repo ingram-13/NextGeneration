@@ -1,8 +1,9 @@
+
 spring:
   datasource:
     username: root
     password: root
-    url: jdbc:mysql://localhost:3306/ssmbuild?serverTimezone=UTC&useUnicod=true&characterEncoding=utf-8
+    url: jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Shanghai&useUnicod=true&characterEncoding=utf-8
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     #Spring Boot 默认是不注入这些属性值的，需要自己绑定
@@ -19,19 +20,37 @@ spring:
     testOnReturn: false
     poolPreparedStatements: true
 
+
     #配置监控统计拦截的filters，stat:监控统计、log4j：日志记录、wall：防御sql注入
     #如果允许时报错  java.lang.ClassNotFoundException: org.apache.log4j.Priority
     #则导入 log4j 依赖即可，Maven 地址： https://mvnrepository.com/artifact/log4j/log4j
     filters: stat,wall,log4j
     maxPoolPreparedStatementPerConnectionSize: 20
     useGlobalDataSourceStat: true
-    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+
 mybatis:
-  mapper-locations: classpath:mapper/*.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+server:
+  servlet:
+    session:
+      tracking-modes: cookie
 
 logging:
   level:
     root: info
-    com.lrm: debug
+    personal.personalblogreturn: debug
+    personal.personalblogreturn.mapper: trace
   file:
     path: log/blog-dev.log
+pagehelper:
+  reasonable: true

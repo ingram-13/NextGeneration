@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+    <link rel="stylesheet" th:href="@{/css/me.css}">
+</head>
+<body >
+<!--导航-->
+<div th:replace="~{commons/commons::adminTopSeg(0)}"></div>
+<!--main-->
+<div class="me-container-small me-margin-tb-massive-1">
+    <div class="ui container">
+        <div class="ui success message large">
+            <h2>Hi,</h2>
+            <p><span th:replace="~{commons/commons::adminNickname}"></span>欢迎登陆 </p>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!--尾部-->
+<div th:replace="~{commons/commons::bottomSeg}"></div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<script>
+    $('.menu.button').click(function () {
+        $('.menu-i').toggleClass('me-mobile-hide');
+    });
+
+    $('.ui.dropdown')
+        .dropdown({on:'hover'})
+    ;
+</script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分类管理</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+    <link rel="stylesheet" th:href="@{/css/me.css}">
+</head>
+<body >
+<!--导航-->
+<div th:replace="~{commons/commons::adminTopSeg(2)}"></div>
+<!--次级导航-->
+<div class="ui menu attached pointing">
+    <div class="ui container">
+        <div class="right menu">
+            <a th:href="@{/admin/queryTypePage}"  class="item ui active">列表一览</a>
+            <a th:href="@{/admin/typesRelease.html}"  class="item">发布</a>
+        </div>
+    </div>
+    <form th:action="@{/admin/queryTypeLike}">
+        <div class="ui input icon transparent item">
+            <input name="name" type="text" placeholder="Search....">
+            <button class="ui fluid mini circular teal submit basic button" type="submit">search</button>
+        </div>
+    </form>
+    <!--search提示消息-->
+    <div class="ui right floated negative message mini" th:unless="${#strings.isEmpty(queryError)}">
+        <i class="close icon"></i>
+        <p class="ui header" th:text="${queryError}"> </p>
+    </div>
+</div>
+<!--main-->
+<div class="me-container-small me-margin-t-big me-margin-b-massive">
+    <div class="ui container">
+        <!--result提示消息-->
+        <div class="ui right floated success message mini" th:unless="${#strings.isEmpty(typeResult)}">
+            <i class="close icon"></i>
+            <div class="ui header">搜寻结果：</div>
+            <p class="ui header" th:text="${typeResult}"> </p>
+        </div>
+        <!--add提示消息-->
+        <div class="ui success message mini" th:unless="${#strings.isEmpty(addTypeSuccess)}">
+            <i class="close icon"></i>
+            <div class="ui header">提示：</div>
+            <p class="ui header" th:text="${addTypeSuccess}"> </p>
+        </div>
+        <!--del提示消息-->
+        <div class="ui success message mini" th:unless="${#strings.isEmpty(delInfo)}">
+            <i class="close icon"></i>
+            <div class="ui header">提示：</div>
+            <p class="ui header" th:text="${delInfo}"> </p>
+        </div>
+        <!--表格-->
+        <table class="ui celled compact teal table center aligned">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>分类名称</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr th:each="type,iterStat: ${pageInfo.list}">
+                <td th:text="${iterStat.count}"></td>
+                <td th:text="${type.name}"></td>
+                <td>
+                    <a th:href="@{/admin/goUpdateType/} + ${type.id}" class="ui mini basic green button">修改</a>
+                    <a th:href="@{/admin/delType/} + ${type.id}" class="ui mini basic red button">删除</a>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <th colspan="3">
+                <div class="ui right floated pagination menu" th:unless="${LF}">
+                    <a class="icon item" th:unless="${isFirstPage}" th:href="@{/admin/queryTypePage/}+${pageNum-1}+@{/}+${pageSize}">
+                        <i class="left chevron icon" ></i>
+                    </a>
+                    <a class="icon item" th:unless="${isLastPage}" th:href="@{/admin/queryTypePage/}+${pageNum+1}+@{/}+${pageSize}">
+                        <i class="right chevron icon" ></i>
+                    </a>
+                </div>
+                <div style="display: inline !important;"th:text="${pageNum}"></div>
+                <button type="button" class="ui right floated secondary button" onclick="window.history.go(-1)" th:unless="${#strings.isEmpty(query)}">返回</button>
+                <a class="ui basic blue button left floated" style="display: inline !important;" th:href="@{/admin/typesRelease.html}"><i class="book icon"></i>新增</a>
+                </th>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+<!--尾部-->
+<div th:replace="~{commons/commons::bottomSeg}"></div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<script>
+    $('.menu.button').click(function () {
+        $('.menu-i').toggleClass('me-mobile-hide');
+    });
+
+    $('.ui.dropdown')
+        .dropdown({on:'hover'})
+    ;
+    //消息提示关闭初始化
+    $('.message .close')
+        .on('click', function () {
+            $(this)
+                .closest('.message')
+                .transition('fade');
+        });
+</script>
+</body>
+</html>

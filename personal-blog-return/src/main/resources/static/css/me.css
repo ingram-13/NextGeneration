@@ -79,11 +79,21 @@ body{
 }
 /*---margin---*/
 .me-margin-tiny{
-    margin: 0.7em 3.5em 0.7em 1.5em !important;
+    margin: 0.7em 1.35em 0.7em 1.5em !important;
+}
+.me-margin-t{
+    margin-top: 1em !important;
+}
+.me-margin-t-big{
+    margin-top: 3em !important;
 }
 .me-margin-tb-massive{
     margin-top: 5em !important;
     margin-bottom: 5em !important;
+}
+.me-margin-tb-massive-1 {
+    margin-top: 7.5em !important;
+    margin-bottom: 12.5em !important;
 }
 .me-margin-tb {
     margin-top: 1em !important;
@@ -92,6 +102,10 @@ body{
 .me-margin-lf-0{
     margin-left: 0 !important;
     margin-right: 0 !important;
+}
+.me-margin-lf{
+    margin-left: 1em !important;
+    margin-right: 1em !important;
 }
 .me-margin-tb-0{
     margin-top: 0 !important;
@@ -107,7 +121,7 @@ body{
     margin-left: 6em !important;
 }
 .me-margin-r {
-    margin-right: 16px !important;
+    margin-right: 0.7em !important;
 }
 /*---font---*/
 .me-text-mini {
@@ -131,7 +145,15 @@ body{
 .me-text-opacity-mini {
     opacity: 0.8 !important;
 }
-
+.me-text-black {
+    color: black !important;
+}
+.me-text-red {
+    color: red !important;
+}
+.me-text-secondary{
+    color: gray !important;
+}
 
 /*---display---*/
 .me-display-inline {

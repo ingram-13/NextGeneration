@@ -1,10 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>500</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+    <link rel="stylesheet" th:href="@{/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/css/me.css}">
 </head>
-<body>
+<body >
+<!--导航-->
+<div th:replace="~{commons/commons::topSeg(0)}"></div>
 
+<!--Main-->
+
+<div class="me-container-small me-padded-tb-massive">
+    <div class="ui error message me-padded-tb-huge" >
+        <div class="ui container">
+            <h2>500</h2>
+            <p>对不起，服务异常，请联系管理员</p>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+
+
+<!--尾部-->
+<div th:replace="~{commons/commons::bottomSeg}"></div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+
+
+<script>
+    $('.menu.button').click(function () {
+        $('.menu-i').toggleClass('me-mobile-hide');
+    });
+</script>
 </body>
 </html>

@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>博客</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
-    <link rel="stylesheet" th:href="@{/css/animate.css}">
-    <link rel="stylesheet" th:href="@{/css/me.css}">
-    <link rel="stylesheet" href="../../static/css/me.css">
+<head th:replace="~{commons/commons::head}">
+    <title>关于我</title>
 </head>
 <body >
 <!--导航-->
-<div th:replace="~{commons/commons::topSeg}"></div>
+<div th:replace="~{commons/commons::topSeg(5)}"></div>
 <!--侧边栏-->
 <div th:replace="~{commons/commons::sideSeg}"></div>
 <!--Main-->
@@ -33,23 +27,13 @@
                     <p class="me-text-spaced-mini me-text-thin me-text-line">兴趣广泛，欢迎志同道合的朋友一起交流</p>
                 </div>
                 <div class="ui attached segment">
-                    <a class="label basic orange ui me-margin-r me-margin-tb">思考</a>
-                    <a class="label basic orange ui me-margin-r me-margin-tb">思考</a>
-                    <a class="label basic orange ui me-margin-r me-margin-tb">思考</a>
-                    <a class="label basic orange ui me-margin-r me-margin-tb">思考</a>
+                    <a class="label black ui me-margin-r me-margin-tb" th:href="@{/tag/1/5/}+${tag.id}" th:each="tag : ${tag}">[[${tag.name}]]</a>
                 </div>
                 <div class="ui attached segment">
-                    <a class="label basic teal ui me-margin-r me-margin-tb left pointing">思考</a>
-                    <a class="label basic teal ui me-margin-r me-margin-tb left pointing">思考</a>
-                    <a class="label basic teal ui me-margin-r me-margin-tb left pointing">思考</a>
-                    <a class="label basic teal ui me-margin-r me-margin-tb left pointing">思考</a>
-                    <a class="label basic teal ui me-margin-r me-margin-tb left pointing">SPRING boot</a>
-                    <a class="label basic teal ui me-margin-r me-margin-tb left pointing">思考</a>
-                    <a class="label basic teal ui me-margin-r me-margin-tb left pointing">思考</a>
-                    <a class="label basic teal ui me-margin-r me-margin-tb left pointing">JavaSE</a>
+                    <a class="label teal ui me-margin-r me-margin-tb left pointing" th:href="@{/type/1/5/}+${type.id}" th:each="type : ${type}">[[${type.name}]]</a>
                 </div>
                 <div class="ui attached segment">
-                    <a href="https://github.com/ingram-13" class="ui circular icon button"><i class="github icon"></i></a>
+                    <a target="_blank" href="https://github.com/ingram-13" class="ui circular icon button"><i class="github icon"></i></a>
                     <div class="ui circular icon button qq-btn"><i class="qq icon"></i></div>
                     <div class="ui circular icon button wx-btn"><i class="weixin icon"></i></div>
                     <div class="ui flowing popup top center transition hidden wx-pop">
@@ -80,17 +64,18 @@
 
 <!--尾部-->
 <div th:replace="~{commons/commons::bottomSeg}"></div>
+
+
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
 
+<!--script-->
+<div th:replace="~{commons/commons::script}"></div>
 <!--myScript-->
 <script>
-    $('.menu.button').click(function () {
-        $('.menu-i').toggleClass('me-mobile-hide');
-    });
     $('.wx-btn').popup({
-            popup : ($('.wx-pop')),
-            position: 'bottom center'
+        popup : ($('.wx-pop')),
+        position: 'bottom center'
     });
     $('.qq-btn').popup({
         popup : ($('.tencent-pop')),

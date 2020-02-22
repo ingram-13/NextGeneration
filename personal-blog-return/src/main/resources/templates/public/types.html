@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>类别</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
-    <link rel="stylesheet" th:href="@{/css/animate.css}">
-    <link rel="stylesheet" th:href="@{/css/me.css}">
-    <link rel="stylesheet" href="../../static/css/me.css">
+<head th:replace="~{commons/commons::head}">
+    <title>分类</title>
 </head>
 <body >
 <!--导航-->
-<div th:replace="~{commons/commons::topSeg}"></div>
+<div th:replace="~{commons/commons::topSeg(2)}"></div>
 <!--侧边栏-->
 <div th:replace="~{commons/commons::sideSeg}"></div>
 <!--Main-->
@@ -23,189 +17,66 @@
                     <div class="ui item header teal">分类</div>
                 </div>
                 <div class="column right aligned">
-                    <div class="ui item header ">共 <h3 class="ui item orange header  me-display-inline">xx</h3>篇</div>
+                    <div class="ui item header ">共 <h3 class="ui item orange header  me-display-inline">[[${size}]]</h3>篇</div>
                 </div>
             </div>
         </div>
         <div class="ui teal attached segment  me-margin-b-massive ">
-            <div class="ui labeled button me-margin-tiny tags-button"><div class="ui basic blue button "><i class="idea icon"></i> JavaSE/Spring全家桶整合</div><a class="ui basic left pointing blue label">13</a></div>
-            <div class="ui labeled button me-margin-tiny tags-button"><div class="ui basic blue button "><i class="idea icon"></i> JavaSE</div><a class="ui basic left pointing blue label">13</a></div>
-            <div class="ui labeled button me-margin-tiny tags-button"><div class="ui basic blue button "><i class="idea icon"></i> JavaSE</div><a class="ui basic left pointing blue label">13</a></div>
-            <div class="ui labeled button me-margin-tiny tags-button"><div class="ui basic blue button "><i class="idea icon"></i> JavaSE</div><a class="ui basic left pointing blue label">13</a></div>
-            <div class="ui labeled button me-margin-tiny tags-button"><div class="ui basic blue button "><i class="idea icon"></i> JavaSE</div><a class="ui basic left pointing blue label">13</a></div>
-            <div class="ui labeled button me-margin-tiny tags-button"><div class="ui basic blue button "><i class="idea icon"></i> JavaSE</div><a class="ui basic left pointing blue label">13</a></div>
-            <div class="ui labeled button me-margin-tiny tags-button"><div class="ui basic blue button "><i class="idea icon"></i> JavaSE</div><a class="ui basic left pointing blue label">13</a></div>
-            <div class="ui labeled button me-margin-tiny tags-button"><div class="ui basic blue button "><i class="idea icon"></i> JavaSE</div><a class="ui basic left pointing blue label">13</a></div>
-            <div class="ui labeled button me-margin-tiny tags-button"><div class="ui basic blue button "><i class="idea icon"></i> JavaSE</div><a class="ui basic left pointing blue label">13</a></div>
-            <div class="ui labeled button me-margin-tiny tags-button"><div class="ui basic blue button "><i class="idea icon"></i> SE</div><a class="ui basic left pointing blue label">13</a></div>
-            <div class="ui labeled button me-margin-tiny tags-button"><div class="ui basic blue button "><i class="idea icon"></i> JavaSE</div><a class="ui basic left pointing blue label">13</a></div>
-            <div class="ui labeled button me-margin-tiny tags-button"><div class="ui basic blue button "><i class="idea icon"></i> EE</div><a class="ui basic left pointing blue label">13</a></div>
-            <div class="ui labeled button me-margin-tiny tags-button"><div class="ui basic blue button "><i class="idea icon"></i> JavaSE</div><a class="ui basic left pointing blue label">13</a></div>
-            <div class="ui labeled button me-margin-tiny tags-button"><div class="ui basic blue button "><i class="idea icon"></i> JavaSE</div><a class="ui basic left pointing blue label">13</a></div>
-            <div class="ui labeled button me-margin-tiny tags-button"><div class="ui basic blue button "><i class="idealight icon"></i> JavaSE</div><a class="ui basic left pointing blue label">13</a></div>
-
+            <a th:href="@{/type/1/5/}+${type.id}" th:each="type : ${types}"  class="ui labeled button me-margin-tiny tags-button"><div class="ui teal button "><i class="idea icon"></i> [[${type.name}]]</div><div class="ui basic left pointing teal label">[[${#arrays.length(type.blog)}]]</div></a>
         </div>
 
+        <div class="ui horizontal divider me-margin-tb-massive"><h3 class="header teal ui" th:text="${typeName==null} ? '分类' : ${typeName}"></h3></div>
 
         <!--content-->
-        <div class="ui top teal attached segment  me-padded-tb-large ">
+        <div th:each="blog : ${pageInfo.list}" class="ui attached segment me-padded-tb-large">
             <div class="ui container">
-                <div class="ui basic segment ">
-                    <div class="ui stackable mobile reversed grid">
+                <div class="ui  segment ">
+                    <div class="ui stackable middle aligned  mobile reversed grid">
                         <!--文章列-->
                         <div class="eleven wide column">
-                            <h3 class="ui header center aligned">来吧难我,来</h3>
-                            <p class="me-text-mini me-text-spaced-mini me-text-opacity-mini me-text-thin">藏青色Navy Blue ,藏青色因用于海军(navy)制服而得名，是一种非常深的蓝色，显瘦，适合气质沉稳、低调的人。 ,宝蓝色Sapphire Blue ,宝蓝色又称宝石蓝色，因为颜色很像纯净璀璨的蓝宝石而得名。这样靓丽的颜色更适合皮肤白皙的人，会衬得人气色更好、更精神。</p>
+                            <h4><a th:href="@{/blog/}+${blog.id}" th:text="${blog.title}" target="_blank" class="ui header center aligned"></a></h4>
+                            <a th:href="@{/blog/}+${blog.id}" th:text="|${blog.description}.........|" class="me-text-secondary me-text-mini me-text-spaced-mini me-text-opacity-mini me-text-thin"></a>
                             <!--文章底部-->
                             <div class="ui grid">
-                                <div class="eleven wide column">
+                                <div class="eight wide column">
                                     <div class="ui horizontal mini link list">
                                         <div class="item ">
-                                            <img th:src="@{/images/profile.jpg}" alt="" class="ui avatar image ">
-                                            <a href="#" class="ui teal">NextGeneration</a>
+                                            <img th:src="@{/images/logo.jpg}" alt="" class="ui avatar image ">
+                                            <a th:href="@{/aboutMe}" class="ui teal">NextGeneration</a>
                                         </div>
                                         <div class="item">
-                                            <i class="calendar icon"></i>2020-1-1
+                                            <i class="calendar icon"></i>[[${#dates.format(blog.createTime,'yyyy-MM-dd')}]]
                                         </div>
                                         <div class="item">
-                                            <i class="eye icon"></i>浏览次数
+                                            <i class="eye icon"></i>[[${blog.viewCounts}]]
                                         </div>
                                     </div>
                                 </div>
                                 <div class="right five wide column">
-                                    <a href="#" class="ui  me-padded-mini me-text-thin me-text-opacity-mini teal label">认知升级</a>
+                                    <a th:each="tag : ${blog.tags}" th:text="${tag.name}" th:href="@{/tag/1/5/}+${tag.id}" class="ui  me-padded-mini me-text-thin me-text-opacity-mini black label">认知升级</a>
+                                </div>
+                                <div class="right three wide column">
+                                    <a th:text="${blog.type.name}" th:href="@{/type/1/5/}+${blog.type.id}" class="ui  me-padded-mini me-text-thin me-text-opacity-mini teal label">认知升级</a>
                                 </div>
                             </div>
                         </div>
                         <!--图片列-->
                         <div class="five wide column">
-                            <img src="https://unsplash.it/800/400?image=155" alt="" class="ui rounded image"  >
+                            <img th:src="${blog.firstPic}" alt="" class="ui rounded image">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--content-->
-        <div class="ui attached segment  me-padded-tb-large ">
-            <div class="ui container">
-                <div class="ui basic segment ">
-                    <div class="ui stackable mobile reversed grid">
-                        <!--文章列-->
-                        <div class="eleven wide column">
-                            <h3 class="ui header center aligned">来吧难我,来</h3>
-                            <p class="me-text-mini me-text-spaced-mini me-text-opacity-mini me-text-thin">藏青色Navy Blue ,藏青色因用于海军(navy)制服而得名，是一种非常深的蓝色，显瘦，适合气质沉稳、低调的人。 ,宝蓝色Sapphire Blue ,宝蓝色又称宝石蓝色，因为颜色很像纯净璀璨的蓝宝石而得名。这样靓丽的颜色更适合皮肤白皙的人，会衬得人气色更好、更精神。</p>
-                            <!--文章底部-->
-                            <div class="ui grid">
-                                <div class="eleven wide column">
-                                    <div class="ui horizontal mini link list">
-                                        <div class="item ">
-                                            <img th:src="@{/images/profile.jpg}" alt="" class="ui avatar image ">
-                                            <a href="#" class="ui teal">NextGeneration</a>
-                                        </div>
-                                        <div class="item">
-                                            <i class="calendar icon"></i>2020-1-1
-                                        </div>
-                                        <div class="item">
-                                            <i class="eye icon"></i>浏览次数
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="right five wide column">
-                                    <a href="#" class="ui  me-padded-mini me-text-thin me-text-opacity-mini teal label">认知升级</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!--图片列-->
-                        <div class="five wide column">
-                            <img src="https://unsplash.it/800/400?image=155" alt="" class="ui rounded image"  >
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--content-->
-        <div class="ui attached segment  me-padded-tb-large ">
-            <div class="ui container">
-                <div class="ui basic segment ">
-                    <div class="ui stackable mobile reversed grid">
-                        <!--文章列-->
-                        <div class="eleven wide column">
-                            <h3 class="ui header center aligned">来吧难我,来</h3>
-                            <p class="me-text-mini me-text-spaced-mini me-text-opacity-mini me-text-thin">藏青色Navy Blue ,藏青色因用于海军(navy)制服而得名，是一种非常深的蓝色，显瘦，适合气质沉稳、低调的人。 ,宝蓝色Sapphire Blue ,宝蓝色又称宝石蓝色，因为颜色很像纯净璀璨的蓝宝石而得名。这样靓丽的颜色更适合皮肤白皙的人，会衬得人气色更好、更精神。</p>
-                            <!--文章底部-->
-                            <div class="ui grid">
-                                <div class="eleven wide column">
-                                    <div class="ui horizontal mini link list">
-                                        <div class="item ">
-                                            <img th:src="@{/images/profile.jpg}" alt="" class="ui avatar image ">
-                                            <a href="#" class="ui teal">NextGeneration</a>
-                                        </div>
-                                        <div class="item">
-                                            <i class="calendar icon"></i>2020-1-1
-                                        </div>
-                                        <div class="item">
-                                            <i class="eye icon"></i>浏览次数
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="right five wide column">
-                                    <a href="#" class="ui  me-padded-mini me-text-thin me-text-opacity-mini teal label">认知升级</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!--图片列-->
-                        <div class="five wide column">
-                            <img src="https://unsplash.it/800/400?image=155" alt="" class="ui rounded image"  >
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--content-->
-        <div class="ui attached segment  me-padded-tb-large ">
-            <div class="ui container">
-                <div class="ui basic segment ">
-                    <div class="ui stackable mobile reversed grid">
-                        <!--文章列-->
-                        <div class="eleven wide column">
-                            <h3 class="ui header center aligned">来吧难我,来</h3>
-                            <p class="me-text-mini me-text-spaced-mini me-text-opacity-mini me-text-thin">藏青色Navy Blue ,藏青色因用于海军(navy)制服而得名，是一种非常深的蓝色，显瘦，适合气质沉稳、低调的人。 ,宝蓝色Sapphire Blue ,宝蓝色又称宝石蓝色，因为颜色很像纯净璀璨的蓝宝石而得名。这样靓丽的颜色更适合皮肤白皙的人，会衬得人气色更好、更精神。</p>
-                            <!--文章底部-->
-                            <div class="ui grid">
-                                <div class="eleven wide column">
-                                    <div class="ui horizontal mini link list">
-                                        <div class="item ">
-                                            <img th:src="@{/images/profile.jpg}" alt="" class="ui avatar image ">
-                                            <a href="#" class="ui teal">NextGeneration</a>
-                                        </div>
-                                        <div class="item">
-                                            <i class="calendar icon"></i>2020-1-1
-                                        </div>
-                                        <div class="item">
-                                            <i class="eye icon"></i>浏览次数
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="right five wide column">
-                                    <a href="#" class="ui  me-padded-mini me-text-thin me-text-opacity-mini teal label">认知升级</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!--图片列-->
-                        <div class="five wide column">
-                            <img src="https://unsplash.it/800/400?image=155" alt="" class="ui rounded image"  >
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="ui bottom attached segment">
+
+        <!--footer-->
+        <div class="ui bottom attached segment" th:unless="${LF}">
             <div class="ui middle aligned two column grid">
                 <div class="column">
-                    <a href="#" class="ui mini teal basic button">上一页</a>
+                    <a th:href="@{/type/} + ${pageNum-1} + @{/} + ${pageSize} +@{/-1}" th:unless="${isFirstPage}" class="ui mini teal basic button">上一页</a>
                 </div>
                 <div class="right aligned column">
-                    <a href="#" class="ui mini teal basic button">下一页</a>
+                    <a th:href="@{/type/} + ${pageNum+1} + @{/} + ${pageSize}+@{/-1}" th:unless="${isLastPage}" class="ui mini teal basic button">下一页</a>
                 </div>
             </div>
         </div>
@@ -215,14 +86,9 @@
 
 <!--尾部-->
 <div th:replace="~{commons/commons::bottomSeg}"></div>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
 
 
-<script>
-    $('.menu.button').click(function () {
-        $('.menu-i').toggleClass('me-mobile-hide');
-    });
-</script>
+<!--script-->
+<div th:replace="~{commons/commons::script}"></div>
 </body>
 </html>

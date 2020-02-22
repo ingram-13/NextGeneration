@@ -1,44 +1,53 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<!--head-->
+<head  th:fragment="head">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+    <link rel="stylesheet" th:href="@{/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/css/typo.css}">
+    <link rel="stylesheet" th:href="@{/css/me.css}">
+    <link rel="stylesheet" th:href="@{/lib/tocbot/tocbot.css}">
 </head>
-<link rel="stylesheet" href="../../static/css/animate.css">
+
+
 <body>
 <!--P导航-->
-<nav th:fragment="topSeg" class="ui inverted attached segment me-padded-tb-mini  ">
+<nav th:fragment="topSeg(n)" class="ui inverted attached segment me-padded-tb-mini  ">
     <div class="ui container">
         <div class="ui inverted secondary menu stackable">
             <h2 class="ui teal header item">NextGeneration</h2>
-            <a herf="index.html" class="menu-i item me-mobile-hide"><i class="home icon"></i>首页</a>
-            <a herf="types.html" class="menu-i item me-mobile-hide"><i class="idea icon"></i>分类</a>
-            <a herf="tags.html" class="menu-i item me-mobile-hide"><i class="tags icon"></i>标签</a>
-            <a herf="file.html" class="menu-i item me-mobile-hide"><i class="clone icon"></i>归档</a>
-            <a herf="aboutMe.html" class="menu-i item me-mobile-hide"><i class="info icon"></i>关于我</a>
-            <div class="right item">
-                <div class="ui input icon transparent inverted">
-                    <input type="text" placeholder="Search....">
-                    <i class="search link icon"></i>
+            <a th:href="@{/index}" class="menu-i item me-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="home icon"></i>首页</a>
+            <a th:href="@{/type}" class="menu-i item me-mobile-hide" th:classappend="${n==2} ? 'active'" ><i class="idea icon"></i>分类</a>
+            <a th:href="@{/tag}" class="menu-i item me-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="tags icon"></i>标签</a>
+            <a th:href="@{/file}" class="menu-i item me-mobile-hide" th:classappend="${n==4} ? 'active'"><i class="clone icon"></i>归档</a>
+            <a th:href="@{/aboutMe}" class="menu-i item me-mobile-hide" th:classappend="${n==5} ? 'active'"><i class="info icon"></i>关于我</a>
+            <form class="right item me-margin-t" th:action="@{/queryBlog}">
+                <div class="right item">
+                    <div class="ui input icon transparent inverted">
+                        <input name="title" type="text" placeholder="Search....">
+                        <button class="ui fluid mini circular teal submit basic button icon" type="submit">search</button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
-        <a href="#" class="ui black button icon  me-top-right me-mobile-show menu button"><i class="sidebar icon "></i></a>
+        <a  class="ui black button icon  me-top-right me-mobile-show menu button"><i class="sidebar icon "></i></a>
     </div>
 </nav>
 <!--P侧边-->
 <div th:fragment="sideSeg" class="me-z-index-max me-menu-width ui  vertical inverted mini menu me-border-radius me-pad-hide me-padded-tb-large me-margin-l-massive me-fixed animated bounceInUp">
     <div class="ui button inverted teal mini circular me-margin-tb left icon me-padded-lf-mini ">
-        <a herf="index.html" class="item me-mobile-hide"><i class="ui mini home icon"></i>首页</a>
+        <a th:href="@{/index}" class="item me-mobile-hide"><i class="ui mini home icon"></i>首页</a>
     </div>
     <div class="ui button inverted teal mini circular left icon me-margin-tb me-padded-lf-mini ">
-        <a herf="types.html" class="item me-mobile-hide"><i class="ui mini idea icon"></i>分类</a>
+        <a th:href="@{/type}" class="item me-mobile-hide"><i class="ui mini idea icon"></i>分类</a>
     </div>
     <div class="ui button inverted teal mini circular left icon me-margin-tb me-padded-lf-mini ">
-        <a herf="tags.html" class="item me-mobile-hide"><i class="mini tags icon"></i>标签</a>
+        <a th:href="@{/tag}" class="item me-mobile-hide"><i class="mini tags icon"></i>标签</a>
     </div>
     <div class="ui button inverted teal mini circular left icon me-margin-tb me-padded-lf-mini ">
-        <a herf="file.html" class="item me-mobile-hide"><i class="mini clone icon"></i>归档</a>
+        <a th:href="@{/file}" class="item me-mobile-hide"><i class="mini clone icon"></i>归档</a>
     </div>
 </div>
 <!--P尾部-->
@@ -53,12 +62,13 @@
                 </div>
             </div>
 
+
             <div class="four wide column inverted header me-text-thin me-text-spaced-mini me-text-opacity-mini">
                 <h4 class="ui inverted header">最新博客</h4>
-                <div class="ui inverted link list">
-                    <a   href="#" class="item">用户故事</a>
-                    <a   href="#" class="item">用户故事</a>
-                    <a   href="#" class="item">用户故事</a>
+                <div id="recommendList">
+                    <div class="ui inverted link list"  th:fragment="recommendList">
+                        <a th:each="blog : ${recommendList}" th:href="@{/blog/} + ${blog.id}" class="item">[[${blog.title}]]</a>
+                    </div>
                 </div>
             </div>
 
@@ -82,21 +92,21 @@
 
 </footer>
 <!--admin导航-->
-<nav th:fragment="adminTopSeg" class="ui inverted attached segment me-padded-tb-mini  ">
+<nav th:fragment="adminTopSeg(n)" class="ui inverted attached segment me-padded-tb-mini  ">
     <div class="ui container">
         <div class="ui inverted secondary menu stackable">
             <h2 class="ui teal header item">管理员</h2>
-            <a herf="#" class="menu-i item me-mobile-hide"><i class="home icon"></i>博客</a>
-            <a herf="#" class="menu-i item me-mobile-hide"><i class="idea icon"></i>分类</a>
-            <a herf="#" class="menu-i item me-mobile-hide"><i class="tags icon"></i>标签</a>
+            <a th:href="@{/admin/queryBlogPage}" class="menu-i item me-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="home icon"></i>博客</a>
+            <a th:href="@{/admin/queryTypePage}" class="menu-i item me-mobile-hide" th:classappend="${n==2} ? 'active'"><i class="idea icon"></i>分类</a>
+            <a th:href="@{/admin/queryTagPage}" class="menu-i item me-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="tags icon"></i>标签</a>
             <div class="right menu">
                 <div class="ui dropdown item">
                     <div class=" text">
-                        <img th:src="@{/images/head.jpg}" alt="" class="ui avatar image">Ljh
+                        <img class="ui avatar image" th:fragment="adminAvatar" th:src="@{${session.userInfo.avatar}}">Ljh
                     </div>
                     <i class="dropdown icon"></i>
                     <div class="menu ">
-                        <a href="#" class="item">注销</a>
+                        <a th:href="@{/admin/logout}" class="item">注销</a>
                     </div>
                 </div>
             </div>
@@ -104,5 +114,31 @@
         <a href="#" class="ui black button icon  me-top-right me-mobile-show menu button"><i class="sidebar icon "></i></a>
     </div>
 </nav>
+<!--admin名称-->
+<span th:fragment="adminNickname" th:text="${session.userInfo.nickName}"></span>
+<!--admin头像-->
+<img class="ui avatar image" th:fragment="adminAvatar" th:src="@{${session.userInfo.avatar}}">
+
+
+
+
+
+
+<!--script-->
+<div th:fragment="script">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
+    <script th:src="@{/lib/tocbot/tocbot.min.js} "></script>
+    <script th:src="@{/lib/qrcode/qrcode.min.js} "></script>
+    <!--myScript-->
+    <script>
+        $('.menu.button').click(function () {
+            $('.menu-i').toggleClass('me-mobile-hide');
+        });
+        $('#recommendList').load(/*[[@{/footer/recommendList}]]*/"/footer/recommendList");
+    </script>
+
+</div>
 </body>
 </html>

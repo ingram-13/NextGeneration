@@ -3,45 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>首页</title>
+    <title>博客管理</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
     <link rel="stylesheet" th:href="@{/css/me.css}">
-    <link rel="stylesheet" href="../../static/css/me.css">
 </head>
 <body >
 <!--导航-->
-<div th:replace="~{commons/commons::adminTopSeg}"></div>
+<div th:replace="~{commons/commons::adminTopSeg(1)}"></div>
 <div class="ui menu attached pointing">
     <div class="ui container">
         <div class="right menu">
-            <a href="#" class="item">发布</a>
-            <a href="#" class="item active teal">列表一览</a>
+            <a th:href="@{/admin/queryBlogPage}" class="item ui active blogPage">列表一览</a>
+            <a th:href="@{/admin/goAddBlog}"  class="item">发布</a>
         </div>
     </div>
 </div>
+
 <!--main-->
 <div class="me-container-small me-margin-tb">
     <div class="ui container">
+        <!--query提示消息-->
+        <div class="ui right floated negative message mini" th:unless="${#strings.isEmpty(queryError)}" >
+            <i class="close icon"></i>
+            <div class="ui header">搜查结果：</div>
+            <p th:text="${queryError}"></p>
+        </div>
+        <!--result提示消息-->
+        <div class="ui right floated success message mini" th:unless="${#strings.isEmpty(blogResult)}">
+            <i class="close icon"></i>
+            <div class="ui header">搜查结果：</div>
+            <p th:text="${blogResult}"></p>
+        </div>
+        <!--操作提示消息-->
+        <div class="ui success message mini" th:unless="${#strings.isEmpty(info)}">
+            <i class="close icon"></i>
+            <div class="ui header">提示：</div>
+            <p class="ui header" th:text="${info}"> </p>
+        </div>
         <!--表单-->
-        <form action="#" method="post" class="ui segment form">
-            <div class="inline fields">
+        <form th:action="@{/admin/queryBlogDynamic}" class="ui secondary segment form" th:unless="${#strings.isEmpty(types)}">
+            <div class="inline fields" >
                 <div class="field">
                     <input type="text" class="ui teal basic" name="title" placeholder="标题">
                 </div>
-                <div class="field">
-                    <div class="ui selection dropdown">
-                        <input name="type" type="hidden"><i class="dropdown icon"></i><div class="default text">分类</div>
-                        <div class="menu">
-                            <div class="item" data-th-value="${1}">错误日志</div>
-                            <div class="item" data-th-value="${1}">错误日志</div>
-                            <div class="item" data-th-value="${1}">错误日志</div>
-                            <div class="item" data-th-value="${1}">错误日志</div>
+                <div class="field" >
+                    <div class="ui labeled action input">
+                        <div class="ui type selection dropdown">
+                            <input type="hidden" name="typeId">
+                            <i class="dropdown icon"></i>
+                            <div class="default text">分类</div>
+                            <div class="menu">
+                                <div th:each="type : ${types}" class="item" th:data-value="${type.id}" th:text="${type.name}"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui checkbox">
-                        <input type="checkbox" id="recommend" name="recommend"><label for="recommend">推荐</label>
+                        <input type="checkbox" id="recommend" name="recommend" checked="checked"><label for="recommend">推荐</label>
                     </div>
                 </div>
                 <div class="field">
@@ -50,101 +69,50 @@
             </div>
         </form>
         <!--表格-->
-        <table class="ui celled table center aligned">
-            <thead>
+        <table  class="ui compact teal table center aligned">
+                <thead>
                 <tr>
                     <th></th>
                     <th>标题</th>
                     <th>类型</th>
                     <th>推荐</th>
+                    <th>状态</th>
                     <th>更新时间</th>
                     <th>操作</th>
                 </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>1</td>
-                <td>springboot项目实战</td>
-                <td>项目实战</td>
-                <td>是</td>
-                <td>20xx-xx-xx xx:xx</td>
-                <td>
-                    <a href="#" class="ui mini basic green button">编辑</a>
-                    <a href="#" class="ui mini basic red button">删除</a>
-                </td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>springboot项目实战</td>
-                <td>项目实战</td>
-                <td>是</td>
-                <td>20xx-xx-xx xx:xx</td>
-                <td>
-                    <a href="#" class="ui mini basic green button">编辑</a>
-                    <a href="#" class="ui mini basic red button">删除</a>
-                </td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>springboot项目实战</td>
-                <td>项目实战</td>
-                <td>是</td>
-                <td>20xx-xx-xx xx:xx</td>
-                <td>
-                    <a href="#" class="ui mini basic green button">编辑</a>
-                    <a href="#" class="ui mini basic red button">删除</a>
-                </td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>springboot项目实战</td>
-                <td>项目实战</td>
-                <td>是</td>
-                <td>20xx-xx-xx xx:xx</td>
-                <td>
-                    <a href="#" class="ui mini basic green button">编辑</a>
-                    <a href="#" class="ui mini basic red button">删除</a>
-                </td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>springboot项目实战</td>
-                <td>项目实战</td>
-                <td>是</td>
-                <td>20xx-xx-xx xx:xx</td>
-                <td>
-                    <a href="#" class="ui mini basic green button">编辑</a>
-                    <a href="#" class="ui mini basic red button">删除</a>
-                </td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>springboot项目实战</td>
-                <td>项目实战</td>
-                <td>是</td>
-                <td>20xx-xx-xx xx:xx</td>
-                <td>
-                    <a href="#" class="ui mini basic green button">编辑</a>
-                    <a href="#" class="ui mini basic red button">删除</a>
-                </td>
-            </tr>
-            </tbody>
-            <tfoot>
-            <tr>
-                <th colspan="6">
-                <div class="ui right floated pagination menu">
-                    <a class="icon item">
-                        <i class="left chevron icon"></i>
-                    </a>
-                    <a class="icon item">
-                        <i class="right chevron icon"></i>
-                    </a>
-                </div>
-                <button class="ui basic blue button left floated "><i class="book icon"></i>新增</button>
-                </th>
-            </tr>
-            </tfoot>
-        </table>
+                </thead>
+                <tbody>
+                <tr th:classappend="${blog.status} ? positive : warning" th:each="blog,iterStat : ${pageInfo.list}">
+                    <td th:text="${iterStat.count}"></td>
+                    <td th:text="${blog.title}"></td>
+                    <td th:text="${blog.type.name}"></td>
+                    <td th:text="${blog.recommend ? '是':'否'}"></td>
+                    <td th:text="${blog.status ? '发布':'草稿'}"></td>
+                    <td th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+                    <td>
+                        <a th:href="@{/admin/goUpdateBlog/}+${blog.id}" class="ui mini basic green button">编辑</a>
+                        <a th:href="@{/admin/delBlog/}+${blog.id}" class="ui mini basic red button">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th colspan="7">
+                        <div class="ui right floated pagination menu" th:unless="${LF}">
+                            <a class="icon item" th:unless="${isFirstPage}" th:href="@{/admin/queryBlogPage/}+${pageNum-1}+@{/}+${pageSize}">
+                                <i class="left chevron icon" ></i>
+                            </a>
+                            <a class="icon item" th:unless="${isLastPage}" th:href="@{/admin/queryBlogPage/}+${pageNum+1}+@{/}+${pageSize}">
+                                <i class="right chevron icon" ></i>
+                            </a>
+                        </div>
+                        <button type="button" class="ui right floated secondary button"  onclick="window.history.go(-1)" th:unless="${!#strings.isEmpty(types)}">返回</button>
+                        <div style="display: inline !important;" th:text="${pageNum}"></div>
+                        <a th:href="@{/admin/goAddBlog}" class="ui basic blue button left floated "><i class="book icon"></i>新增</a>
+                    </th>
+                </tr>
+                </tfoot>
+            </table>
     </div>
 </div>
 
@@ -164,6 +132,13 @@
     $('.ui.dropdown')
         .dropdown({on:'hover'})
     ;
+    //消息提示关闭初始化
+    $('.message .close')
+        .on('click', function () {
+            $(this)
+                .closest('.message')
+                .transition('fade');
+        });
 </script>
 </body>
 </html>

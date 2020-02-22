@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper .//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="personal.personalblogreturn.mapper.BlogMapper">
+
+<insert id="addBlog" parameterType="personal.personalblogreturn.pojo.Type">
+    INSERT INTO t_blog(id, appreciate_switch, comment_switch, content, copyright_switch, create_time,
+                       first_pic, flag, recommend, status, title, update_time, view_counts, type_id, user_id)
+            VALUES (id=#{id}, appreciate_switch=#{appreciateSwitch}, comment_switch=#{commentSwitch}, content=#{content},
+                    copyright_switch=#{copyrightSwitch}, create_time=#{createTime},first_pic=#{firstPic}, flag=#{flag},
+                    recommend=#{recommend}, status=#{status}, title=#{title},update_time=#{updateTime}, view_counts=#{viewCounts},
+                    type_id=#{typeId}, user_id=1);
+    INSERT INTO t_blog_tags(blog_id, tags_id) VALUES (blog_id=#{id},tags_id=#{tagIds});
+</insert>
+
+<update id="updateBlog" parameterType="personal.personalblogreturn.pojo.Blog">
+    UPDATE t_blog SET appreciate_switch=#{appreciateSwitch}, comment_switch=#{commentSwitch}, content=#{content},
+                      copyright_switch=#{copyrightSwitch}, create_time=#{createTime},first_pic=#{firstPic}, flag=#{flag},
+                      recommend=#{recommend}, status=#{status}, title=#{title},update_time=#{updateTime}, view_counts=#{viewCounts},
+                      type_id=#{type.getId()}, user_id=#{userId}
+                  WHERE id = #{id};
+</update>
+
+
+</mapper>
+ 
